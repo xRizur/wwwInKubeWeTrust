@@ -1,0 +1,25 @@
+name: Build and Push to Azure Container Registry
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main  # lub nazwa Twojego głównego brancha
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build and test
+      run: |
+        npm install
+        npm run build
+
+    - name: Build Docker image and push to ACR
+      run: |
+        docker build -t ${{ secrets.AZURE_ACR_NAME }}.azurecr.io/my_vue_app:${{ github.sha }} .
+        docker login ${{ secrets.AZURE_ACR_NAME }}.azurecr.io -u ${{ secrets.AZURE_ACR_USERNAME }} -p ${{ secrets.AZURE_ACR_PASSWORD }}
+        docker push ${{ secrets.AZURE_ACR_NAME }}.azurecr.io/my_vue_app:${{ github.sha }}
