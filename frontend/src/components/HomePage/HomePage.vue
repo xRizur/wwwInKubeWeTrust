@@ -69,32 +69,32 @@ data() {
   return {
     technologies: [
       {
-        src: require('../assets/images/technology_logos/Kubernetes.svg'),
+        src: require('../../assets/images/technology_logos/Kubernetes.svg'),
         alt: 'DevOps Icon',
         description: 'Kubernetes Services'
       },
       {
-        src: require('../assets/images/technology_logos/Microsoft_Azure.svg.png'),
+        src: require('../../assets/images/technology_logos/Microsoft_Azure.svg.png'),
         alt: 'Cloud Icon',
         description: 'Cloud Management'
       },
       {
-        src: require('../assets/images/technology_logos/terraform.png'),
+        src: require('../../assets/images/technology_logos/terraform.png'),
         alt: 'Terraform Icon',
         description: 'Terraform Solutions'
       },
       {
-        src: require('../assets/images/technology_logos/Jenkins_logo.svg.png'),
+        src: require('../../assets/images/technology_logos/Jenkins_logo.svg.png'),
         alt: 'Terraform Icon', // Zauważyłem, że ten alt jest taki sam jak dla Terraform, więc warto go zmienić
         description: 'CI / CD Pipelines'
       },
       {
-        src: require('../assets/images/technology_logos/Grafana_logo.svg.png'),
+        src: require('../../assets/images/technology_logos/Grafana_logo.svg.png'),
         alt: 'Terraform Icon', // Zauważyłem, że ten alt jest taki sam jak dla Terraform, więc warto go zmienić
         description: 'Monitoring'
       },
       {
-        src: require('../assets/images/technology_logos/terraform.png'),
+        src: require('../../assets/images/technology_logos/terraform.png'),
         alt: 'Terraform Icon',
         description: 'Terraform Solutions' // Zauważyłem, że jest dwukrotnie Terraform, więc warto upewnić się, czy to zamierzone
       }

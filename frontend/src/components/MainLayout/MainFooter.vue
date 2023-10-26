@@ -3,7 +3,7 @@
     <div class="container mx-auto flex justify-between items-center">
         <router-link to="/">
   <div class="logo">
-    <img src="../assets/images/brand/brand-logo.png" alt="Logo" class="h-10 w-auto">
+    <img src="../../assets/images/brand/brand-logo.png" alt="Logo" class="h-10 w-auto">
   </div>
 </router-link>
 

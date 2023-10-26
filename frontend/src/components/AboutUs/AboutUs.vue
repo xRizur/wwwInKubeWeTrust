@@ -29,7 +29,7 @@
   </template>
   
   <script>
-  import TeamMember from '@/components/TeamMember.vue';
+  import TeamMember from '@/components/AboutUs/TeamMember.vue';
   
   export default {
     name: 'AboutUsPage',
@@ -45,7 +45,7 @@
             position: 'Site Reliability Engineer',
             university: 'Uj',
             certificates: ['Hashicorp Certified: Terraform Associate (003)', 'Cert 2'],
-            photo: require('../assets/images/people_images/face-1.png')
+            photo: require('../../assets/images/people_images/face-1.png')
           },
           {
             id: 2,
@@ -53,7 +53,7 @@
             position: 'Application Administrator',
             university: 'PJATK',
             certificates: ['Kubernetes'],
-            photo: require('../assets/images/people_images/face-2.png')
+            photo: require('../../assets/images/people_images/face-2.png')
           },
           {
             id: 3,
@@ -61,7 +61,7 @@
             position: 'Stanowisko',
             university: 'Nazwa uczelni',
             certificates: ['Cert 1', 'Cert 2'],
-            photo: require('../assets/images/people_images/face-3.png')
+            photo: require('../../assets/images/people_images/face-3.png')
           },
         ]
       }

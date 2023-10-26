@@ -3,9 +3,6 @@ const bodyParser = require('body-parser');
 const { Project, Task } = require('./database');
 const cors = require('cors');
 
-// Użyj middleware cors przed innymi endpointami.
-
-
 const app = express();
 const PORT = 3000;
 app.use(cors());
@@ -75,6 +72,34 @@ app.get('/projects/:projectId/tasks', async (req, res) => {
       res.status(400).json({ error: 'Nie można usunąć projektu' });
     }
   });
+// Usuwanie zadania
+    app.delete('/tasks/:taskId', async (req, res) => {
+    try {
+        const task = await Task.findByPk(req.params.taskId);
+        if (!task) return res.status(404).json({ error: 'Zadanie nie znaleziono' });
+
+        await task.destroy();
+        res.status(200).json({ message: 'Zadanie usunięto' });
+    } catch (error) {
+        res.status(400).json({ error: 'Nie można usunąć zadania' });
+    }
+    });
+    // Aktualizacja zadania
+    app.put('/tasks/:taskId', async (req, res) => {
+    try {
+      const task = await Task.findByPk(req.params.taskId);
+      if (!task) return res.status(404).json({ error: 'Zadanie nie znaleziono' });
+  
+      task.name = req.body.name || task.name;
+      task.description = req.body.description || task.description;
+      await task.save();
+  
+      res.status(200).json(task);
+    } catch (error) {
+      res.status(400).json({ error: 'Nie można zaktualizować zadania' });
+    }
+  });
+  
   
 
 app.listen(PORT, () => {

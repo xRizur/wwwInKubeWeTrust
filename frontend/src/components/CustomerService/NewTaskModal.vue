@@ -17,6 +17,9 @@
         >
           Dodaj Task
         </button>
+        <button @click="closeModal" class="bg-blue-500 text-white rounded px-4 py-2 hover:bg-blue-600 transition w-full">
+        Zamknij
+      </button>
       </div>
     </div>
 </template>
@@ -54,13 +57,13 @@ export default {
       } catch (error) {
         console.error('Nie udało się dodać zadania:', error);
       }
-    }
+    },
+    closeModal() {
+    this.$emit('close-modal');
+  },
   }
 }
 </script>
 
 <style scoped>
-.modal {
-  /* Stylizacja modalu */
-}
 </style>
