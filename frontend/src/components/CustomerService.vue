@@ -1,37 +1,73 @@
 <template>
-    <div class="p-6">
-      <div class="mb-4">
-        <button @click="createNewProject" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          Dodaj nowy projekt
-        </button>
-      </div>
-      <div>
+    <div class="p-4 space-y-4">
+      <NewProject @project-created="addProject" />
+      <button 
+        @click="openModal" 
+        class="bg-blue-500 text-white rounded px-4 py-2 hover:bg-blue-600 transition"
+      >
+        Dodaj Task
+      </button>
+      <NewTaskModal :isOpen="isModalOpen" @task-created="addTask" />
+
+      <ul>
         <ul>
-          <li v-for="project in projects" :key="project.id" class="mb-2">
-            <router-link :to="`/customer-service/${project.id}`">{{ project.name }}</router-link>
-          </li>
-        </ul>
-      </div>
+  <li v-for="project in projects" :key="project.id">
+    {{ project.name }}
+    <button @click="deleteProject(project.id)">Usuń</button>
+    <router-link :to="{ name: 'ProjectDetails', params: { id: project.id } }">Szczegóły</router-link>
+  </li>
+</ul>
+
+</ul>
+
     </div>
   </template>
   
   <script>
+  import axios from 'axios';
+  import NewProject from './NewProject.vue';
+  import NewTaskModal from './NewTaskModal.vue';
+  
   export default {
+    components: {
+      NewProject,
+      NewTaskModal
+    },
     data() {
       return {
-        projects: [
-          // Przykładowe dane projektów; w rzeczywistości będą pobierane z serwera.
-          { id: 1, name: "Projekt 1" },
-          { id: 2, name: "Projekt 2" },
-          // ...
-        ],
+        projects: [],
+        isModalOpen: false
       };
     },
     methods: {
-      createNewProject() {
-        // Logika dodawania nowego projektu (np. otwarcie okna modalnego).
+      addProject(project) {
+        this.projects.push(project);
       },
+      openModal() {
+        this.isModalOpen = true;
+      },
+      addTask(task) {
+        const lastProject = this.projects[this.projects.length - 1];
+        lastProject.tasks.push(task);
+        this.isModalOpen = false;
+      },
+      async deleteProject(id) {
+    try {
+      await axios.delete(`http://localhost:3000/projects/${id}`);
+      this.projects = this.projects.filter(project => project.id !== id);
+    } catch (error) {
+      console.error("Nie udało się usunąć projektu.", error);
+    }
+  }
     },
-  };
+    async created() {
+      try {
+        const response = await axios.get('http://localhost:3000/projects');
+        this.projects = response.data;
+      } catch (error) {
+        console.error("Nie udało się pobrać projektów.", error);
+      }
+    }
+  }
   </script>
   

@@ -4,6 +4,7 @@ import AboutUs from './components/AboutUs.vue';
 import CustomerService from './components/CustomerService.vue';
 import SignUp from './components/SignUp.vue';
 import LoginPage from './components/LoginPage.vue';
+import ProjectDetails from './components/ProjectDetails.vue';
 
 const routes = [
   {
@@ -30,7 +31,8 @@ const routes = [
     path: '/login',
     name: 'login',
     component: LoginPage
-  }
+  },
+  { path: '/projects/:id', component: ProjectDetails, name: 'ProjectDetails' }
 ];
 
 const router = createRouter({
