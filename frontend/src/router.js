@@ -5,6 +5,7 @@ import CustomerService from './components/CustomerService/CustomerService.vue';
 import SignUp from './components/Signup/SignUp.vue';
 import LoginPage from './components/Signup/LoginPage.vue';
 import ProjectDetails from './components/CustomerService/ProjectDetails.vue';
+import UserProfile from './components/UserProfile/UserProfile.vue';
 
 const routes = [
   {
@@ -32,7 +33,12 @@ const routes = [
     name: 'login',
     component: LoginPage
   },
-  { path: '/projects/:id', component: ProjectDetails, name: 'ProjectDetails' }
+  { path: '/projects/:id', component: ProjectDetails, name: 'ProjectDetails' },
+  {
+    path: '/userprofile',
+    name: 'UserProfile',
+    component: UserProfile
+  }
 ];
 
 const router = createRouter({
