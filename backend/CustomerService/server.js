@@ -7,7 +7,6 @@ const app = express();
 const PORT = 3000;
 app.use(cors());
 
-// ... reszta twojego kodu ..
 app.use(bodyParser.json());
 
 // Pobieranie wszystkich projektów
@@ -20,7 +19,7 @@ app.get('/projects', async (req, res) => {
     }
   });
   
-  // Endpoint do tworzenia nowego projektu
+// Endpoint do tworzenia nowego projektu
 app.post('/projects', async (req, res) => {
   try {
     const project = await Project.create(req.body);

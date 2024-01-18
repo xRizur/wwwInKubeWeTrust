@@ -74,17 +74,31 @@ export default {
     };
   },
   methods: {
-    async register() {
+    validateInput() {
+      if (!this.email.includes('@')) {
+        this.errorMessage = 'Nieprawidłowy adres email';
+        return false;
+      }
+      if (this.password.length < 8) {
+        this.errorMessage = 'Hasło musi mieć co najmniej 8 znaków';
+        return false;
+      }
       if (this.password !== this.confirmPassword) {
         this.errorMessage = 'Hasła się nie zgadzają';
+        return false;
+      }
+      return true;
+    },
+    async register() {
+      if (!this.validateInput()) {
         return;
       }
 
       const userData = {
-        fullName: this.fullName, // Zmieniono z "full_name" na "fullName"
+        fullName: this.fullName,
         username: this.username,
         email: this.email,
-        phoneNumber: this.phone, // Zmieniono z "phone_number" na "phoneNumber"
+        phoneNumber: this.phone,
         password: this.password,
       };
 
