@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { Project, Task } = require('./database');
 const cors = require('cors');
-
+const axios = require('axios');
+const userServerUrl = 'http://localhost:3001';
 const app = express();
 const PORT = 3000;
 app.use(cors());
@@ -11,23 +12,32 @@ app.use(bodyParser.json());
 
 // Pobieranie wszystkich projektów
 app.get('/projects', async (req, res) => {
-    try {
-      const projects = await Project.findAll();
-      res.json(projects);
-    } catch (err) {
-      res.status(500).json({ error: 'Nie można pobrać projektów' });
+  try {
+    const userId = req.query.userId;
+    if (!userId) {
+      return res.status(400).json({ error: 'Brak identyfikatora użytkownika' });
     }
-  });
-  
+
+    const projects = await Project.findAll({
+      where: { ownerId: userId }
+    });
+    res.json(projects);
+  } catch (err) {
+    res.status(500).json({ error: 'Nie można pobrać projektów' });
+  }
+});
+
 // Endpoint do tworzenia nowego projektu
 app.post('/projects', async (req, res) => {
   try {
-    const project = await Project.create(req.body);
+    const { name, ownerId } = req.body; 
+    const project = await Project.create({ name, ownerId });
     res.status(201).json(project);
   } catch (error) {
     res.status(400).json({ error: 'Nie można utworzyć projektu' });
   }
 });
+
 app.get('/projects/:projectId', async (req, res) => {
     try {
       const project = await Project.findByPk(req.params.projectId);

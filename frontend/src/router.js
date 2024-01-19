@@ -6,7 +6,7 @@ import SignUp from './components/Signup/SignUp.vue';
 import LoginPage from './components/Signup/LoginPage.vue';
 import ProjectDetails from './components/CustomerService/ProjectDetails.vue';
 import UserProfile from './components/UserProfile/UserProfile.vue';
-
+import ContactUs from './components/ContactUs/ContactUs.vue';
 const routes = [
   {
     path: '/',
@@ -38,6 +38,11 @@ const routes = [
     path: '/userprofile',
     name: 'UserProfile',
     component: UserProfile
+  },
+  {
+    path: '/contactus',
+    name: 'ContactUs',
+    component: ContactUs
   }
 ];
 

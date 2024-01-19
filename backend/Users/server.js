@@ -7,12 +7,10 @@ const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
 const { body, validationResult } = require('express-validator');
 const helmet = require('helmet');
 const cors = require('cors');
-const { sequelize, User } = require('./database.js'); // Aktualizuj ścieżkę do modelu użytkownika
+const { sequelize, User } = require('./database.js');
 
 const app = express();
 const port = 3001;
-
-// Konfiguracja Passport - LocalStrategy
 passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
     try {
         const user = await User.findOne({ where: { email } });
@@ -29,7 +27,6 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, passwor
     }
 }));
 
-// Konfiguracja Passport - JwtStrategy
 const jwtOptions = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey: 'your_jwt_secret'
@@ -101,7 +98,7 @@ app.get('/api/user', passport.authenticate('jwt', { session: false }), async (re
         if (!user) {
             return res.status(404).json({ message: 'Użytkownik nie znaleziony' });
         }
-        res.json({ fullName: user.fullName, email: user.email });
+        res.json({ id: user.id, name: user.fullName, email: user.email });
     } catch (error) {
         res.status(500).json({ message: 'Błąd serwera' });
     }
@@ -116,9 +113,17 @@ app.put('/api/user', passport.authenticate('jwt', { session: false }), async (re
         }
         user.fullName = req.body.fullName || user.fullName;
         user.email = req.body.email || user.email;
+        user.phoneNumber = req.body.phoneNumber || user.phoneNumber;
+
+        if (req.body.password) {
+            const hashedPassword = await bcrypt.hash(req.body.password, 10);
+            user.password = hashedPassword;
+        }
+
         await user.save();
         res.json({ message: 'Dane użytkownika zaktualizowane' });
     } catch (error) {
+        console.error(error);
         res.status(500).json({ message: 'Błąd serwera' });
     }
 });

@@ -21,5 +21,4 @@ export default {
 </script>
 
 <style>
-/* Możesz tutaj umieścić globalne style dla Twojej aplikacji */
 </style>

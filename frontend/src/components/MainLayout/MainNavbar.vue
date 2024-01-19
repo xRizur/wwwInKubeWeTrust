@@ -9,15 +9,15 @@
 
       <nav class="space-x-4">
         <router-link to="/" class="text-gray-600 hover:text-purple-600">Home</router-link>
-        <router-link to="/about-us" class="text-gray-600 hover:text-purple-600">About Us</router-link>
+        <router-link to="/about-us" class="text-gray-600 hover:text-purple-600">O Nas</router-link>
         <router-link to="/customer-service" class="text-gray-600 hover:text-purple-600">Customer Service</router-link>
-        
-        <!-- Jeśli użytkownik jest zalogowany -->
-        <router-link v-if="isLogged" to="/userprofile" class="text-gray-600 hover:text-purple-600">Moje konto</router-link>
+
+        <router-link v-if="isLogged" to="/userprofile" class="text-gray-600 hover:text-purple-600">Moje
+          konto</router-link>
         <button v-if="isLogged" @click.prevent="logout" class="p-3 bg-red-500 text-white rounded">Wyloguj się</button>
 
-        <!-- Jeśli użytkownik nie jest zalogowany -->
-        <router-link v-else to="/login" class="cta bg-purple-700 text-white px-4 py-2 rounded hover:bg-purple-800">Sign In</router-link>
+        <router-link v-else to="/login" class="cta bg-purple-700 text-white px-4 py-2 rounded hover:bg-purple-800">Sign
+          In</router-link>
       </nav>
     </div>
   </header>
@@ -27,23 +27,23 @@
 import axios from 'axios';
 
 export default {
-data() {
-  return {
-    isLogged: !!localStorage.getItem('token')
-  };
-},
-name: 'MainNavbar',
-methods: {
-  logout() {
-    localStorage.removeItem('token');
-    axios.defaults.headers.common['Authorization'] = null;
-    this.$router.push('/');
+  data() {
+    return {
+      isLogged: !!localStorage.getItem('token')
+    };
+  },
+  name: 'MainNavbar',
+  methods: {
+    logout() {
+      localStorage.removeItem('token');
+      axios.defaults.headers.common['Authorization'] = null;
+      this.$router.push('/');
+    }
+  },
+  watch: {
+    '$route': function () {
+      this.isLogged = !!localStorage.getItem('token');
+    }
   }
-},
-watch: {
-  '$route': function() {
-    this.isLogged = !!localStorage.getItem('token');
-  }
-}
 }
 </script>

@@ -2,15 +2,20 @@ const { Sequelize } = require('sequelize');
 
 const sequelize = new Sequelize({
   dialect: 'sqlite',
-  storage: './database.sqlite'  // plik bazy danych
+  storage: './database.sqlite' 
 });
 
 const Project = sequelize.define('project', {
   name: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  ownerId: {
+    type: Sequelize.INTEGER,
+    allowNull: false
   }
 });
+
 
 const Task = sequelize.define('task', {
   name: {

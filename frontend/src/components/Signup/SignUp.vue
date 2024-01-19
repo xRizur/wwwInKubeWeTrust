@@ -7,53 +7,28 @@
         </h2>
       </div>
       <form @submit.prevent="register" class="mt-8 space-y-4">
-        <input 
-          v-model="fullName"
-          type="text" 
-          placeholder="Pełne imię i nazwisko" 
-          class="block w-full p-3 mb-4 bg-gray-200 rounded"
-        >
-        <input 
-          v-model="username"
-          type="text" 
-          placeholder="Nazwa użytkownika" 
-          class="block w-full p-3 mb-4 bg-gray-200 rounded"
-        >
-        <input 
-          v-model="email"
-          type="email" 
-          placeholder="Adres email" 
-          class="block w-full p-3 mb-4 bg-gray-200 rounded"
-        >
-        <input 
-          v-model="phone"
-          type="tel" 
-          placeholder="Numer telefonu" 
-          class="block w-full p-3 mb-4 bg-gray-200 rounded"
-        >
-        <input 
-          v-model="password"
-          type="password" 
-          placeholder="Hasło" 
-          class="block w-full p-3 mb-4 bg-gray-200 rounded"
-        >
-        <input 
-          v-model="confirmPassword"
-          type="password" 
-          placeholder="Potwierdź hasło" 
-          class="block w-full p-3 mb-4 bg-gray-200 rounded"
-        >
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input v-model="fullName" type="text" placeholder="Pełne imię i nazwisko" class="p-3 bg-gray-200 rounded">
+          <input v-model="username" type="text" placeholder="Nazwa użytkownika" class="p-3 bg-gray-200 rounded">
+        </div>
+
+        <input v-model="email" type="email" placeholder="Adres email" class="block w-full p-3 mb-4 bg-gray-200 rounded">
+        <input v-model="phone" type="tel" placeholder="Numer telefonu" class="block w-full p-3 mb-4 bg-gray-200 rounded">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input v-model="password" type="password" placeholder="Hasło" class="p-3 bg-gray-200 rounded">
+          <input v-model="confirmPassword" type="password" placeholder="Potwierdź hasło" class="p-3 bg-gray-200 rounded">
+        </div>
         <p v-if="errorMessage" class="text-red-500">{{ errorMessage }}</p>
         <button class="w-full p-3 bg-indigo-600 text-white rounded">
           Zarejestruj się
         </button>
       </form>
       <div class="mt-4 text-center">
-        <p class="text-sm text-gray-600">Masz już konto? <router-link to="/login" class="text-indigo-600 hover:text-indigo-900">Zaloguj się</router-link></p>
+        <p class="text-sm text-gray-600">Masz już konto? <router-link to="/login"
+            class="text-indigo-600 hover:text-indigo-900">Zaloguj się</router-link></p>
       </div>
       <div class="mt-4 flex justify-between">
-        <div class="bg-gray-300 w-16 h-16 rounded-full flex items-center justify-center">Logo Google</div>
-        <div class="bg-gray-300 w-16 h-16 rounded-full flex items-center justify-center">Logo GitHub</div>
       </div>
     </div>
   </div>
@@ -112,7 +87,7 @@ export default {
         });
 
         if (response.status === 201) {
-          this.$router.push('/login'); 
+          this.$router.push('/login');
         } else {
           this.errorMessage = 'Błąd podczas rejestracji. Spróbuj ponownie.';
         }
@@ -124,6 +99,4 @@ export default {
 }
 </script>
 
-<style scoped>
-  /* Dodaj tu ewentualne style specyficzne dla tej strony */
-</style>
+<style scoped></style>

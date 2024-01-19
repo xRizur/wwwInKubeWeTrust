@@ -1,26 +1,18 @@
 <template>
-  <div v-if="isOpen" class="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 bg-opacity-50 bg-gray-700">
+  <div v-if="isOpen"
+    class="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 bg-opacity-50 bg-gray-700">
     <div class="bg-white rounded-lg shadow-lg p-8 max-w-md mx-auto">
       <h2 class="text-2xl font-semibold mb-6 text-center">Edytuj Task</h2>
       <div class="flex flex-col space-y-4">
         <label for="taskName" class="text-sm font-medium text-gray-600">Nazwa taska</label>
-        <input 
-          id="taskName"
-          v-model="taskName"
-          placeholder="Wpisz nazwę taska"
-          class="border rounded-md p-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+        <input id="taskName" v-model="taskName" placeholder="Wpisz nazwę taska"
+          class="border rounded-md p-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
         <div class="flex justify-between">
-          <button 
-            @click="save" 
-            class="bg-green-500 text-white rounded-md px-6 py-3 hover:bg-green-600 transition transform hover:scale-105"
-          >
+          <button @click="save"
+            class="cta bg-purple-700 text-white px-4 py-2 rounded hover:bg-purple-800">
             Zapisz
           </button>
-          <button 
-            @click="close" 
-            class="text-gray-600 hover:text-gray-800 transition"
-          >
+          <button @click="close" class="text-gray-600 hover:text-gray-800 transition">
             Anuluj
           </button>
         </div>
@@ -63,5 +55,4 @@ export default {
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

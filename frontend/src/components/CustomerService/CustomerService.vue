@@ -2,16 +2,11 @@
   <div class="bg-gray-100 min-h-screen p-6">
     <div class="max-w-7xl mx-auto bg-white p-6 rounded-lg shadow">
       <h1 class="text-3xl mb-4">Customer Service</h1>
-      <button 
-        @click="openModal" 
-        class="bg-blue-500 text-white rounded px-4 py-2 hover:bg-blue-600 transition mb-6"
-      >
+      <button @click="openModal" class="cta bg-purple-700 text-white px-4 py-2 rounded hover:bg-purple-800">
         Nowy Projekt
       </button>
-      <!-- Obsługa zdarzenia close-modal -->
-      <NewProject :isOpen="isModalOpen" @project-created="addProject" @close-modal="closeModal" />
+      <NewProject :isOpen="isModalOpen" @project-created="addProject" @close-modal="closeModal" :ownerId="userId" />
 
-      
       <table class="w-full border-collapse">
         <thead>
           <tr class="bg-gray-200">
@@ -24,7 +19,8 @@
             <td class="p-2 border">{{ project.name }}</td>
             <td class="p-2 border flex justify-around">
               <button @click="deleteProject(project.id)" class="text-red-500 hover:underline">Usuń</button>
-              <router-link :to="{ name: 'ProjectDetails', params: { id: project.id } }" class="text-blue-500 hover:underline">Szczegóły</router-link>
+              <router-link :to="{ name: 'ProjectDetails', params: { id: project.id } }"
+                class="text-blue-500 hover:underline">Szczegóły</router-link>
             </td>
           </tr>
         </tbody>
@@ -44,7 +40,8 @@ export default {
   data() {
     return {
       projects: [],
-      isModalOpen: false
+      isModalOpen: false,
+      userId: 0
     };
   },
   methods: {
@@ -53,6 +50,7 @@ export default {
       this.isModalOpen = false;
     },
     openModal() {
+      this.fetchUserId();
       this.isModalOpen = true;
     },
     closeModal() {
@@ -65,11 +63,26 @@ export default {
       } catch (error) {
         console.error("Nie udało się usunąć projektu.", error);
       }
+    },
+    async fetchUserId() {
+      try {
+        const response = await axios.get('http://localhost:3001/api/user', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        if (response.data && response.data.id) {
+          this.userId = response.data.id;
+        }
+      } catch (error) {
+        console.error('Błąd podczas pobierania ID użytkownika:', error);
+      }
     }
   },
   async created() {
     try {
-      const response = await axios.get('http://localhost:3000/projects');
+      await this.fetchUserId();
+      const response = await axios.get(`http://localhost:3000/projects?userId=${this.userId}`);
       this.projects = response.data;
     } catch (error) {
       console.error("Nie udało się pobrać projektów.", error);
