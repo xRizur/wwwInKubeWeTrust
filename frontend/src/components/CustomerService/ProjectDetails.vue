@@ -25,11 +25,12 @@
       <div class="border-t-2 border-blue-200 mt-6 pt-6">
         <h2 class="text-2xl mb-4">Lista zadań:</h2>
         <ul v-if="project.tasks && project.tasks.length">
-          <li v-for="task in project.tasks" :key="task.id" class="p-2 border-b-2 border-gray-200 flex justify-between">
-            {{ task.name }}
-            <div>
+        <li v-for="task in project.tasks" :key="task.id" class="p-2 border-b-2 border-gray-200 flex justify-between">
+        <div>
+          <p>{{ task.name }}</p>
+          <p class="text-gray-600">{{ task.description }}</p>
               <button @click="openEditModal(task)"
-                class="bg-yellow-500 text-white rounded px-2 py-1 hover:bg-yellow-600 transition">Edytuj</button>
+                class="bg-yellow-500 text-white rounded px-2 py-1 hover:bg-yellow-600 transition gap-3">Edytuj</button>
               <button @click="deleteTask(task.id)" class="bg-red-500 text-white rounded px-2 py-1 hover:bg-red-600 transition">Usuń</button>
             </div>
           </li>

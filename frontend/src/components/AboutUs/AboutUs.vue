@@ -56,18 +56,18 @@ export default {
         },
         {
           id: 2,
-          name: 'Jar0_Slaw',
+          name: 'Jarosław Adameczewski',
           position: 'Application Administrator',
-          university: 'PJATK',
+          university: 'PK',
           certificates: ['Kubernetes'],
           photo: require('../../assets/images/people_images/face-2.png')
         },
         {
           id: 3,
-          name: 'Imię i nazwisko',
-          position: 'Stanowisko',
-          university: 'Nazwa uczelni',
-          certificates: ['Cert 1', 'Cert 2'],
+          name: 'Adam Nowak',
+          position: 'Brak',
+          university: 'Brak',
+          certificates: ['W trakcie', ''],
           photo: require('../../assets/images/people_images/face-3.png')
         },
       ]

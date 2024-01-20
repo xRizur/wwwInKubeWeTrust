@@ -1,4 +1,3 @@
-<!-- TeamMember.vue -->
 <template>
   <div
     class="team-member bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transform transition-transform duration-500 cursor-pointer group h-screen">

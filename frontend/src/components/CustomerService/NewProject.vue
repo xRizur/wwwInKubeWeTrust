@@ -47,7 +47,7 @@ export default {
       try {
         const response = await axios.post('http://localhost:3000/projects', {
           name: this.projectName,
-          ownerId: this.ownerId // Upewnij się, że ownerId jest dostępne
+          ownerId: this.ownerId
         });
         this.$emit('project-created', response.data);
         this.projectName = '';

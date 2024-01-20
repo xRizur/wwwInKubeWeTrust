@@ -50,7 +50,7 @@ app.use(express.json());
 app.use(passport.initialize());
 
 // Endpoint rejestracji
-app.post('/register', 
+app.post('/register',
     body('fullName').isLength({ min: 1 }).withMessage('Imię i nazwisko jest wymagane'),
     body('username').isAlphanumeric().withMessage('Nazwa użytkownika może zawierać tylko litery i cyfry'),
     body('email').isEmail().withMessage('Nieprawidłowy adres email'),
