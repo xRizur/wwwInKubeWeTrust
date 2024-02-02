@@ -31,23 +31,23 @@ jobs:
         env:
           CI: true
 
-      # # Build Backend Users
-      # - name: Build Backend Users
-      #   run: |
-      #     cd backend/Users
-      #     npm install
-      #     npm run build # Zakładając, że masz skrypt build w package.json
-      #   env:
-      #     CI: true
+      # Build Backend Users
+      - name: Build Backend Users
+        run: |
+          cd backend/Users
+          npm install
+          npm start
+        env:
+          CI: true
 
-      # # Build Backend CustomerService
-      # - name: Build Backend CustomerService
-      #   run: |
-      #     cd backend/CustomerService
-      #     npm install
-      #     npm run build # Zakładając, że masz skrypt build w package.json
-      #   env:
-      #     CI: true
+      # Build Backend CustomerService
+      - name: Build Backend CustomerService
+        run: |
+          cd backend/CustomerService
+          npm install
+          npm start
+        env:
+          CI: true
 
       # Deploy to Azure Static Web Apps
       - name: Deploy to Azure Static Web Apps
@@ -58,7 +58,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: "upload"
           app_location: "/frontend" # Adjust according to your structure
-          api_location: #"backend" # This should point to the root of your backend code if you have multiple functions
+          api_location: "backend" # This should point to the root of your backend code if you have multiple functions
           output_location: "dist" # The location where Vue build outputs the files
 
   close_pull_request_job:
